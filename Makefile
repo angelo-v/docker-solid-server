@@ -4,4 +4,10 @@ test:
 		-v /var/run/docker.sock:/var/run/docker.sock:ro \
 		aveltens/docker-testinfra
 
-.PHONY: test
+build:
+	docker build -t aveltens/solid-server ./src
+
+inspect: build
+	docker run --rm -it aveltens/solid-server sh
+
+.PHONY: test build inspect
