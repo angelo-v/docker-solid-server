@@ -11,7 +11,11 @@ inspect: build ## run a shell in the docker image
 	docker run --rm -it aveltens/solid-server sh
 
 start: build ## start solid-server docker container
-	docker run --rm --name solid-server -it -d aveltens/solid-server
+	docker run --rm \
+		-it -d \
+		-p 8443:8443 \
+		--name solid-server \
+		aveltens/solid-server
 
 stop: ## stop the solid-server docker container
 	docker stop solid-server
