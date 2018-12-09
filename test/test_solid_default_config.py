@@ -37,3 +37,6 @@ def test_solid_config_dir_exists_and_owned_by_node(host):
     assert solid_config.is_directory
     assert solid_config.user == "node"
     assert solid_config.group == "node"
+
+def test_solid_is_listening_on_port_8443(host):
+    assert host.socket("tcp://0.0.0.0:8443").is_listening
