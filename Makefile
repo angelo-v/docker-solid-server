@@ -8,7 +8,7 @@ build: ## build the docker image
 	docker build -t aveltens/solid-server ./src
 
 inspect: build ## run a shell in the docker image
-	docker run --rm -it aveltens/solid-server sh
+	docker run --rm -it --entrypoint sh aveltens/solid-server
 
 start: build ## start solid-server docker container
 	docker run --rm \

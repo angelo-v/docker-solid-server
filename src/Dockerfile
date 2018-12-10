@@ -1,17 +1,26 @@
 FROM node:10-alpine
 
+RUN apk add --no-cache openssl
+
 RUN npm install -g solid-server
 
+# image configuration
 ENV SOLID_HOME=/opt/solid
 ENV PROCESS_USER=node
+ENV TEMPORARY_CERT_NAME=solid-temporary
 
 WORKDIR ${SOLID_HOME}
-RUN chown ${PROCESS_USER}:${PROCESS_USER} ${SOLID_HOME}
+COPY ./entrypoint.sh ./entrypoint.sh
+COPY ./create-temporary-cert.sh ./create-temporary-cert.sh
+RUN chown --recursive ${PROCESS_USER}:${PROCESS_USER} ${SOLID_HOME}
 
 USER ${PROCESS_USER}
 
 # solid configuration
 ENV SOLID_ROOT=${SOLID_HOME}/data
+ENV SOLID_SSL_KEY=${SOLID_HOME}/${TEMPORARY_CERT_NAME}.key
+ENV SOLID_SSL_CERT=${SOLID_HOME}/${TEMPORARY_CERT_NAME}.crt
 ENV SOLID_PORT=8443
+ENTRYPOINT ["./entrypoint.sh"]
 
-CMD ["solid", "start"]
+CMD ["start"]

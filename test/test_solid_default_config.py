@@ -38,5 +38,30 @@ def test_solid_config_dir_exists_and_owned_by_node(host):
     assert solid_config.user == "node"
     assert solid_config.group == "node"
 
+def test_temporary_tls_cert_exists(host):
+    cert = host.file("/opt/solid/solid-temporary.crt")
+    assert cert.exists
+    assert cert.is_file
+    assert cert.user == "node"
+    assert cert.group == "node"
+
+def test_temporary_tls_key_exists(host):
+    key = host.file("/opt/solid/solid-temporary.key")
+    assert key.exists
+    assert key.is_file
+    assert key.user == "node"
+    assert key.group == "node"
+
+def test_certificate_and_key_are_used(host):
+    env = host.check_output("env")
+    assert "SOLID_SSL_KEY=/opt/solid/solid-temporary.key" in env
+    assert "SOLID_SSL_CERT=/opt/solid/solid-temporary.crt" in env
+
+def test_solid_is_running(host):
+    solid = host.process.get(comm="node")
+    assert solid.args == "node /usr/local/bin/solid start"
+    assert solid.user == "node"
+    assert solid.group == "node"
+
 def test_solid_is_listening_on_port_8443(host):
     assert host.socket("tcp://0.0.0.0:8443").is_listening
