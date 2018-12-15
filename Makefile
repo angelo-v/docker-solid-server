@@ -5,7 +5,7 @@ test: ## run testinfra tests against the project
 		aveltens/docker-testinfra
 
 build: ## build the docker image
-	docker build -t aveltens/solid-server ./src
+	docker build --file ./src/Dockerfile --tag aveltens/solid-server .
 
 inspect: build ## run a shell in the docker image
 	docker run --rm -it --entrypoint sh aveltens/solid-server

@@ -10,8 +10,8 @@ ENV PROCESS_USER=node
 ENV TEMPORARY_CERT_NAME=solid-temporary
 
 WORKDIR ${SOLID_HOME}
-COPY ./entrypoint.sh ./entrypoint.sh
-COPY ./create-temporary-cert.sh ./create-temporary-cert.sh
+COPY ./src/entrypoint.sh ./entrypoint.sh
+COPY ./src/create-temporary-cert.sh ./create-temporary-cert.sh
 RUN chown --recursive ${PROCESS_USER}:${PROCESS_USER} ${SOLID_HOME}
 
 USER ${PROCESS_USER}
