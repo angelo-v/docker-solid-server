@@ -7,5 +7,5 @@ def client():
 
 @pytest.fixture(scope="session")
 def image(client):
-     img, _ = client.images.build(path='./src')
+     img, _ = client.images.build(path='./', dockerfile='src/Dockerfile')
      return img
