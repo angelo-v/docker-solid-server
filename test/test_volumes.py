@@ -35,13 +35,19 @@ def test_solid_data_dir_is_mounted(host):
   solid_data = host.file("/opt/solid/data/")
   assert solid_data.exists
   assert solid_data.is_directory
+  assert solid_data.uid == 1000
+  assert solid_data.gid == 1000
 
 def test_solid_db_dir_is_mounted(host):
   solid_db = host.file("/opt/solid/.db/")
   assert solid_db.exists
   assert solid_db.is_directory
+  assert solid_db.uid == 1000
+  assert solid_db.gid == 1000
 
 def test_solid_config_dir_is_mounted(host):
   solid_config = host.file("/opt/solid/config/")
   assert solid_config.exists
   assert solid_config.is_directory
+  assert solid_config.uid == 1000
+  assert solid_config.gid == 1000
