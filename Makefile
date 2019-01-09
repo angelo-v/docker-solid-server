@@ -14,6 +14,8 @@ start: build ## start solid-server docker container
 	docker run --rm \
 		-it -d \
 		-p 8443:8443 \
+		-u "$(id -u):$(id -g)" \
+		-v $(shell pwd)/data:/opt/solid/data \
 		--name solid-server \
 		aveltens/solid-server
 
