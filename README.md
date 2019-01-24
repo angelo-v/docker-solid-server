@@ -4,40 +4,46 @@ Containerized version of node-solid-server
 
 ## How to use
 
-This is still work in progress and not meant to be used in production yet.
-
-If you want to experiment with the image and/or contribute to its development,
-please read the rest of this ReadMe.
-
-## Run tests
-
+For quickly check out this image or solid-server in general you can run:
 ```bash
-make test
+docker run -p 8443:8443 aveltens/solid-server
 ```
 
-The first run might take a while, since the image has to be build. Follow up test runs will be faster.
+This will use auto-generated self-signed certificates and is not suited for production use.
 
-## Start & stop locally
+### Environment variables
 
-Build and run a local container named solid-server via
+All solid configuration flags can be set by an equivalent environment variable.
+The official solid-server documentation
+[explains them in detail](https://github.com/solid/node-solid-server#extra-flags-expert).
 
-```bash
-make start
-```
+### Docker compose
 
-and stop it via 
+For a productive setup you may want to use docker-compose. Example setups can be found
+in the [examples folder](./examples). Here is an overview of what is in there:
 
-```bash
-make stop
-```
+#### Simple setup without proxy
 
-## Inspect & debug
+`./examples/docker-compose.simple.yml`
 
-To start a shell in a running container (started with `make start`) run `make attach`.
+Run solid-server directly on HTTPS port 443 without a proxy in between.
+You will need to have your certificates ready and mount them into the container.
 
-To just run a shell in the built image (without starting solid) run `make inspect`.
+#### Running solid behind nginx proxy
+
+Coming soon...
+
+#### Other setups
+
+The setup you need is not presented here? Feel free to ask, or provide a Pull Request
+with your solution.
 
 ## Feedback & Discussion
 
 There is a [topic in the Solid Forum](https://forum.solidproject.org/t/official-solid-docker-image/748/5),
 you are welcome to join in.
+
+## Contributing
+
+If you would like to contribute to the development of this image,
+see [CONTRIBUTING.md](./CONTRIBUTING.md)
