@@ -2,7 +2,7 @@ FROM node:10-alpine
 
 RUN apk add --no-cache openssl
 
-RUN npm install -g solid-server@5.0.0-beta.5
+RUN npm install -g solid-server@5.0.0-beta.6
 
 # image configuration
 ENV SOLID_HOME=/opt/solid
