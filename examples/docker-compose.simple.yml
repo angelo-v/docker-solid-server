@@ -24,6 +24,7 @@ services:
       - /opt/solid/config:/opt/solid/config
 
       # (!) mount existing TLS certificates, e.g. from letsencrypt
+      # (!) ensure that the key and fullchain files are readable by UID 1000
       - /etc/letsencrypt/live/solid.example/:/opt/solid/certs
 
     environment:
