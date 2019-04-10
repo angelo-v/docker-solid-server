@@ -9,7 +9,7 @@ For quickly check out this image or solid-server in general you can run:
 docker run -p 8443:8443 aveltens/solid-server
 ```
 
-This will use auto-generated self-signed certificates and is not suited for production use.
+You will be able to access the server via `https://localhost:8443` then. It will use auto-generated self-signed certificates and is **not suited for production use**. For a production server you will have to create some real certificates and configure environment variables, like SOLID_SERVER_URI, SOLID_SSL_KEY and SOLID_SSL_CERT. Take a look at the examples folder [at GitHub](https://github.com/angelo-v/docker-solid-server/tree/master/examples) for details.
 
 ### Environment variables
 
@@ -20,7 +20,7 @@ The official solid-server documentation
 ### Docker compose
 
 For a productive setup you may want to use docker-compose. Example setups can be found
-in the [examples folder](./examples). Here is an overview of what is in there:
+in the [examples folder](https://github.com/angelo-v/docker-solid-server/tree/master/examples). Here is an overview of what is in there:
 
 #### Simple setup without proxy
 
