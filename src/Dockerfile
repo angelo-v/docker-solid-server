@@ -11,6 +11,7 @@ ENV TEMPORARY_CERT_NAME=solid-temporary
 
 WORKDIR ${SOLID_HOME}
 COPY ./src/entrypoint.sh ./entrypoint.sh
+COPY ./src/checks.sh ./checks.sh
 COPY ./src/create-temporary-cert.sh ./create-temporary-cert.sh
 RUN chown --recursive ${PROCESS_USER}:${PROCESS_USER} ${SOLID_HOME}
 
