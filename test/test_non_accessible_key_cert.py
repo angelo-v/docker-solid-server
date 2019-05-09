@@ -3,6 +3,8 @@ import docker
 import pytest
 import time
 
+import os
+
 testinfra_hosts = ['docker://test_container']
 
 
@@ -11,14 +13,10 @@ def container(client, image):
   container = client.containers.run(
       image.id,
       name="test_container",
-      volumes={
-        'missing_data': {'bind': '/opt/solid/data'},
-        'missing_db': {'bind': '/opt/solid/.db'},
-        'missing_config': {'bind': '/opt/solid/config'}
-      },
       environment=[
-        "SOLID_SSL_KEY=/missing/key",
-        "SOLID_SSL_CERT=/missing/cert"
+        # just using to files that exist but are not readable by node
+        "SOLID_SSL_KEY=/root",
+        "SOLID_SSL_CERT=/etc/shadow"
       ],
       detach=True,
       tty=True
@@ -32,10 +30,7 @@ def container(client, image):
 def test_container_fails_with_errors(container):
   assert container.status == "created"
   logs = container.logs()
-  assert "✗ /opt/solid/config not writable by node" in logs
-  assert "✗ /opt/solid/data not writable by node" in logs
-  assert "✗ /opt/solid/.db not writable by node" in logs
-  assert "✗ /missing/key does not exist" in logs
-  assert "✗ /missing/cert does not exist" in logs
+  assert "✗ /root not readable by node" in logs
+  assert "✗ /etc/shadow not readable by node" in logs
   assert "Finished: ERROR" in logs
   assert not "Finished: SUCCESS" in logs

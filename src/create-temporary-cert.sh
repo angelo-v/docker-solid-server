@@ -12,6 +12,3 @@ openssl req -nodes -x509 -days 3 -newkey rsa:2048 \
 	-keyout ./$NAME.key \
 	-out ./$NAME.crt \
 	-subj "/O=$NAME/OU=$NAME/CN=$NAME"
-
-echo "Finished: SUCCESS"
-exit 0;
