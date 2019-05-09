@@ -26,9 +26,7 @@ check_if_writable()
 
 check_if_file_readable()
 {
-  # checks if the given dir is writable, if it exists
-  # it's ok if the dir does not exist at all, because it will be created
-  # during solid server startup then and have the correct permissions
+  # checks if the given file exists and is readable
   file=$1
   if [ -e "${file}" ]; then
     if [ -r "${file}" ]; then
