@@ -6,20 +6,26 @@ check_failed()
 {
   checks_failed=$((checks_failed + 1))
 }
-check_dir_exists()
+check_if_writable()
 {
+  # checks if the given dir is writable, if it exists
+  # it's ok if the dir does not exist at all, because it will be created
+  # during solid server startup then and have the correct permissions
   dir=$1
-  if [ -f "${dir}" ]; then
-    echo "✓ ${dir} exists"
-  else
-    echo "✗ ${dir} missing"
-    check_failed
+  if [ -d "${dir}" ]; then
+    if [ -w "${dir}" ]; then
+      ls -lah ${dir};
+      echo "✓ ${dir} is accessible by $(whoami)"
+    else
+      echo "✗ ${dir} not writable by $(whoami)"
+      check_failed
+    fi
   fi
 }
 
-check_dir_exists "${SOLID_HOME}/data"
-check_dir_exists "${SOLID_HOME}/.db"
-check_dir_exists "${SOLID_HOME}/config"
+check_if_writable "${SOLID_HOME}/config"
+check_if_writable "${SOLID_HOME}/data"
+check_if_writable "${SOLID_HOME}/.db"
 
 if [ "$checks_failed" -gt 0 ]; then
   echo "Finished: ERROR"
