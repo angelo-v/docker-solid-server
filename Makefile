@@ -4,6 +4,9 @@ test: ## run testinfra tests against the project
 		-v /var/run/docker.sock:/var/run/docker.sock:ro \
 		aveltens/docker-testinfra
 
+lint: ## run hadolint against the Dockerfile
+	docker run --rm -i hadolint/hadolint < src/Dockerfile
+
 build: ## build the docker image
 	docker build --file ./src/Dockerfile --tag aveltens/solid-server .
 
