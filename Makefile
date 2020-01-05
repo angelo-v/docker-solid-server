@@ -8,7 +8,7 @@ lint: ## run hadolint against the Dockerfile
 	docker run --rm -i hadolint/hadolint < src/Dockerfile
 
 build: ## build the docker image
-	docker build --file ./src/Dockerfile --tag aveltens/solid-server .
+	cd src && docker build --tag aveltens/solid-server .
 
 inspect: build ## run a shell in the docker image
 	docker run --rm -it --entrypoint sh aveltens/solid-server
