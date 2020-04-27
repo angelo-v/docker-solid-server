@@ -33,7 +33,15 @@ You will need to have your certificates ready and mount them into the container.
 
 `./examples/docker-compose.nginx.yml`
 
-Run solid-server on port 8443 behind a nginx proxy on 443. You will need to setup an nginx container with letsencrypt companion [as described here](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion).
+Run solid-server on port 8443 behind a nginx proxy on 443. You will need to setup an nginx container with letsencrypt
+companion [as described here](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion).
+
+#### All-in one nginx proxy + letsencrypt + solid server 
+
+`./examples/docker-compose.all-in-one.yml`
+
+Run solid-server on port 8443 behind a [nginx proxy](https://hub.docker.com/r/jwilder/nginx-proxy/) on 443, including
+certificate generation via [letsencrypt companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion).
 
 #### Other setups
 
