@@ -29,7 +29,7 @@ services:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
     restart: always
     environment:
-      -"NGINX_PROXY_CONTAINER=nginx"
+      - "NGINX_PROXY_CONTAINER=nginx"
     volumes:
       - nginx-conf:/etc/nginx/conf.d
       - vhostd:/etc/nginx/vhost.d
