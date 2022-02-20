@@ -30,7 +30,7 @@ def test_node_command_is_available(host):
     assert host.exists("node")
 
 def test_node_version_is_10(host):
-    assert host.check_output("node --version").startswith('v10')
+    assert host.check_output("node --version").startswith('v16')
 
 def test_openssl_command_is_available(host):
     assert host.exists("openssl")
